@@ -7,9 +7,11 @@ Since LogiX interfaces are aging, clutter up your code, spawn unecessary duplica
 
 ### Extra Extract Modes
 - Linked register
+    
     This lets you extract a value (or reference) register that is linked to the reference proxy you're holding (such as when you grab a value from an inspector for example) via ValueCopy, and allows you to not just pull from it, but also write to it via write nodes like you would normally.
 
 - Drive **value** node
+    
     Emphasized because this will actually pull out and automatically drive whatever value you're holding (again, such as from an inspector) with the `Drive` node usually found in `Actions` in the LogiX menu.
 
 These options both let you avoid having to use interfaces for nearly any purpose whatsoever, and makes your LogiX truly free from any worldly attachments.
