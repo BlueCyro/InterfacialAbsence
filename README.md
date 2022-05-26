@@ -16,3 +16,8 @@ Since LogiX interfaces are aging, clutter up your code, spawn unecessary duplica
 
 These options both let you avoid having to use interfaces for nearly any purpose whatsoever, and makes your LogiX truly free from any worldly attachments.
 
+# Extra features
+
+- Lets you long click on reference arrows to reveal what they point at
+- Pairs nicely with [Nodentify](https://github.com/RileyGuy/Nodentify) for automatic node labelling
+- Pairs nicely with [Proxiy](https://github.com/RileyGuy/Proxify), allowing you to drive value registers, or create registers for your registers - if you're into that :)
