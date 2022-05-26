@@ -3,9 +3,7 @@
 ## This is a [NeosModLoader](https://github.com/zkxs/NeosModLoader) mod that removes much of the need for LogiX interfaces.
 
 ## Overview
-Since LogiX interfaces are aging, clutter up your code, spawn unecessary duplicates, and fly around like spaghetti monsters half the time, this mod gives you a path to avoid them in nearly every scenario where you don't need direct impulses to a component.
-
-One of the main features this adds is an extra couple of extra options to the extraction mode of a given LogiX tip.
+Since LogiX interfaces are aging, clutter up your code, spawn unecessary duplicates, and fly around like spaghetti monsters half the time, this mod gives you a path to avoid them in nearly every scenario where you don't need direct impulses to a component. This is done through a couple extra extract modes - listed below.
 
 ### Extra Extract Modes
 - Linked register
