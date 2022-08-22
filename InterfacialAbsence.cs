@@ -35,6 +35,7 @@ public class InterfacialAbsence : NeosMod
             int index = codes.FindLastIndex(x => {
                 if (!(x.operand is MethodInfo) || x.opcode != OpCodes.Callvirt)
                     return false;
+                
                 MethodInfo operand = (MethodInfo)x.operand;
                 return operand.Name == "AddEnumShiftItem" && operand.GetGenericArguments()[0] == typeof(LogixTip.ExtractMode);
             });
@@ -42,7 +43,7 @@ public class InterfacialAbsence : NeosMod
             if (index == -1)
             {
                 Msg("InterfacialAbsence: Failed to find AddEnumShiftItem");
-                return codes.AsEnumerable();
+                return codes;
             }
             
             int removalRangeIndex = -1;
@@ -59,10 +60,11 @@ public class InterfacialAbsence : NeosMod
                     }
                 }
             }
+            
             if (removalRangeIndex == -1)
             {
                 Msg("InterfacialAbsence: Could not find removal range");
-                return codes.AsEnumerable();
+                return codes;
             }
             codes.RemoveRange(removalRangeIndex + 1, index - removalRangeIndex);            
             
@@ -72,14 +74,13 @@ public class InterfacialAbsence : NeosMod
                 new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(LogixTip), "_extract")),
                 new CodeInstruction(OpCodes.Call, typeof(EvilMethods).GetMethod("EvilInjectExtractModes"))
             });
-            return codes.AsEnumerable();
+            return codes;
         }
 
         [HarmonyPatch(typeof(LogixTip), "OnSecondaryPress")]
         [HarmonyTranspiler]
         public static IEnumerable<CodeInstruction> OnSecondaryPress_Transpiler(IEnumerable<CodeInstruction> instructions, ILGenerator il)
         {
-            // Msg("InterfacialAbsence: Transpiler2");
             var codes = instructions.ToList();
             int index = codes.FindLastIndex(x => {
                 if (x.opcode != OpCodes.Switch)
@@ -90,7 +91,7 @@ public class InterfacialAbsence : NeosMod
             if (index == -1)
             {
                 Msg("InterfacialAbsence: Failed to find switch");
-                return codes.AsEnumerable();
+                return codes;
             }
 
             int IsInstIndex = -1;
@@ -110,7 +111,7 @@ public class InterfacialAbsence : NeosMod
             if (IsInstIndex == -1)
             {
                 Msg("InterfacialAbsence: Failed to find IsInst");
-                return codes.AsEnumerable();
+                return codes;
             }
 
             LocalBuilder? LocalVariable = codes[IsInstIndex + 1].operand as LocalBuilder;
@@ -119,7 +120,7 @@ public class InterfacialAbsence : NeosMod
             {
                 Msg("InterfacialAbsence: Failed to find local variable");
                 Msg(codes[IsInstIndex + 1].operand.GetType().ToString() + ": " + codes[IsInstIndex + 1].operand.ToString());
-                return codes.AsEnumerable();
+                return codes;
             }
 
             Label SwitchEnd = (Label)codes[index + 1].operand;
@@ -134,7 +135,7 @@ public class InterfacialAbsence : NeosMod
                 new CodeInstruction(OpCodes.Ldfld, AccessTools.Field(typeof(LogixTip), "_extract")),
                 new CodeInstruction(OpCodes.Call, typeof(EvilMethods).GetMethod("EvilSwitchCaseChecker"))
             });
-            return codes.AsEnumerable();
+            return codes;
         }
     }
 }
